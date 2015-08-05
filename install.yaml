@@ -1,0 +1,20 @@
+---
+- hosts: debian-virtual  # set this if needed!
+  gather_facts: no
+
+  remote_user: artlogic  # set this if needed!
+  become: yes
+  become_method: su
+
+  tasks:
+
+  - name: install any pending upgrades
+    apt: update_cache=yes upgrade=full
+
+  - name: retrieve recommended packages that aren't installed
+    shell: aptitude search '~RBrecommends:~i' | cut -f4 -d' '
+    register: packages
+
+  - name: install missing recommended packages, marking auto
+    command: aptitude -y install {{ item }}+M
+    with_items: "{{ packages.stdout_lines }}"
