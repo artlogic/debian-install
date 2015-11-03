@@ -1,11 +1,14 @@
 ---
-- hosts: debian-virtual  # set this if needed!
+
+# setup etckeeper and sudo and then grant the remote user sudo access
+
+# this host is expected to have a few characteristics so that this all works:
+# - ansible_user is set for the host
+# - the ansible_user and root have the same password (root is locked early on)
+
+- hosts: debian-virtual
   gather_facts: no
 
-  vars:
-    remote_user: artlogic  # set this if needed!
-
-  remote_user: "{{ remote_user }}"
   become: yes
   become_method: su
 
@@ -14,11 +17,33 @@
   - name: install etckeeper and update the package cache (installs git as well)
     apt: update_cache=yes name=etckeeper
 
-  - name: add the remote_user to the sudo group
-    user: name={{ remote_user }} append=yes groups=sudo
+  # this is a separate install because we want etckeeper to pick it up
+
+  - name: install sudo
+    apt: name=sudo
+
+  - name: add the ansible_user to the sudo group
+    user: name={{ ansible_user }} append=yes groups=sudo
 
   - name: committing the group change to etckeeper
-    command: "etckeeper commit 'adding {{ remote_user }} to the sudo group'"
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'adding {{ ansible_user }} to the sudo group'; fi"
+
+# perform the rest of the install
+
+- hosts: debian-virtual  # change if needed - see note above
+  gather_facts: no
+
+  become: yes
+
+  tasks:
+
+  - name: lock root (so it can't get up to mischief)
+    command: usermod -L root
+
+  - name: committing the root user lock to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'locking the root user'; fi"
 
   - name: turn on periodic apt updates and autocleaning
     copy: dest=/etc/apt/apt.conf.d/02periodic
@@ -28,7 +53,8 @@
           mode=0644
 
   - name: committing the apt config change to etckeeper
-    command: "etckeeper commit 'enabling periodic updates for apt'"
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling periodic updates for apt'; fi"
 
   - name: enable the mozilla iceweasel release repo
     copy: dest=/etc/apt/sources.list.d/iceweasel-release.list
@@ -41,7 +67,26 @@
     apt_key: url=http://mozilla.debian.net/archive.asc
 
   - name: committing the sources.list change to etckeeper
-    command: "etckeeper commit 'enabling the iceweasel-release repo'"
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling the iceweasel-release repo'; fi"
+
+  - name: enable the unstable repo
+    copy: dest=/etc/apt/sources.list.d/unstable.list
+          src=etc/apt/sources.list.d/unstable.list
+          owner=root
+          group=root
+          mode=0644
+
+  - name: make sure unstable packages are never installed unless we ask specifically
+    copy: dest=/etc/apt/preferences.d/prevent-unstable
+          src=etc/apt/preferences.d/prevent-unstable
+          owner=root
+          group=root
+          mode=0644
+
+  - name: committing the unstable repo change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling the unstable repo'; fi"
 
   - name: install any pending upgrades (and update the cache with the new repos)
     apt: update_cache=yes upgrade=full
@@ -79,14 +124,7 @@
     apt: name={{ item }}
     with_items:
     - ntp
-    - sudo
     - ufw
-
-  - name: lock root (so it can't get up to mischief)
-    command: usermod -L root
-
-  - name: committing the root user lock to etckeeper
-    command: "etckeeper commit 'locking the root user'"
 
   - name: configure ufw
     ufw: rule=allow name=OpenSSH
@@ -96,6 +134,7 @@
 
   - name: committing the ufw changes to etckeeper
     command: "etckeeper commit 'config and enable ufw'"
+    ignore_errors: yes
 
   # GUI
 
@@ -106,6 +145,28 @@
     - i3
     - lightdm
     - network-manager-gnome
+    - pulseaudio
+    - xautolock
+    - gtk-redshift
 
   - name: install iceweasel
     apt: name=iceweasel default_release=jessie-backports
+
+  - name: install pidgin
+    apt: name={{ item }}
+    with_items:
+    - pidgin
+    - pidgin-libnotify
+    - pidgin-otr
+    - pidgin-twitter
+
+  # annoyingly, apt doesn't support the /distro syntax (only the -t distro syntax)
+
+  - name: install emacs (from unstable)
+    command: aptitude -y install {{ item }}
+    with_items:
+    - emacs24-common/unstable
+    - emacs24-common-non-dfsg/unstable
+    - emacs24-el/unstable
+    - emacs24-bin-common/unstable
+    - emacs24/unstable
