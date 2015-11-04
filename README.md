@@ -31,9 +31,6 @@ Things left to install
 Things left to configure
 ------------------------
 
-* create a branch for the (proprietary) T60 stuff
-* it woudl be nice to write a little etckeeper module (or use this: https://github.com/expansible/etckeeper )
-* it would be even nicer to fix the problem with the apt module
 * make sure the script can be run many times
 * Swap caps and ctrl (using /etc/default/keyboard)
 * modify i3bar/i3status to notify me of pending upgrades
@@ -85,3 +82,9 @@ Things Handled by Local Copies
 * ruby - rvm/rbenv
 * emacs packages - package.el
 * node - nvm
+
+Ansible Annoyances
+------------------
+
+* it would be nice to write a little etckeeper module (or use this: https://github.com/expansible/etckeeper )
+* it would be even nicer to fix the problem with the apt module
