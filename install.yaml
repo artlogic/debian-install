@@ -101,6 +101,20 @@
 
   # thinkpad specific stuff
 
+  - name: create bluetooth firmware path
+    file: path=/lib/firmware/brcm
+          owner=root
+          group=root
+          mode=0755
+          state=directory
+
+  - name: install the bluetooth firmware
+    copy: dest=/lib/firmware/brcm/BCM20702A0-0a5c-21e6.hcd
+          src=lib/firmware/brcm/BCM20702A0-0a5c-21e6.hcd
+          owner=root
+          group=root
+          mode=0644
+
   - name: install tp_smapi kernel module
     apt: name=tp-smapi-dkms
 
