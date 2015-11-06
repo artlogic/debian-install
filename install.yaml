@@ -88,6 +88,15 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling the unstable repo'; fi"
 
+  - name: swapping ctrl and caps
+    patch: >
+      src=etc/default/keyboard.patch
+      dest=/etc/default/keyboard
+
+  - name: committing the swap caps ctrl change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'swapping caps and ctrl'; fi"
+
   - name: install any pending upgrades (and update the cache with the new repos)
     apt: update_cache=yes upgrade=full
 

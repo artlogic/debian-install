@@ -20,6 +20,10 @@ Things that are broken
 Things left to install
 ----------------------
 
+* emacs unstable is no longer installing... :(
+  * Depends: libdbus-1-3 (>= 1.9.14) but 1.8.20-0+deb8u1 is installed.
+  * Depends: libtinfo5 (>= 6) but 5.9+20140913-1+b1 is installed.
+  * https://wiki.debian.org/BuildingFormalBackports
 * review: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
 * review: http://suckless.org/ http://suckless.org/rocks http://suckless.org/sucks/
 * review: https://wiki.archlinux.org/index.php/List_of_applications
@@ -32,7 +36,6 @@ Things left to configure
 ------------------------
 
 * make sure the script can be run many times
-* Swap caps and ctrl (using /etc/default/keyboard)
 * modify i3bar/i3status to notify me of pending upgrades
 * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
 * copy/paste from an xterm - this could be a mess (maybe use a different term?)
@@ -74,6 +77,8 @@ Things I use now, but I'm going to wait until I need them
 ### Tricky things
 
 * 1Password
+  * https://news.ycombinator.com/item?id=10411146
+  * http://www.passwordstore.org/
 
 Things Handled by Local Copies
 ------------------------------

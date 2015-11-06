@@ -1,0 +1,4 @@
+8c8
+< XKBOPTIONS=""
+---
+> XKBOPTIONS="ctrl:swapcaps"
