@@ -70,6 +70,17 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling the iceweasel-release repo'; fi"
 
+  - name: enable the backports repo
+    copy: dest=/etc/apt/sources.list.d/jessie-backports.list
+          src=etc/apt/sources.list.d/jessie-backports.list
+          owner=root
+          group=root
+          mode=0644
+
+  - name: committing the jessie-backports.list change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling the jessie-backports repo'; fi"
+
   - name: enable the unstable repo
     copy: dest=/etc/apt/sources.list.d/unstable.list
           src=etc/apt/sources.list.d/unstable.list
@@ -115,11 +126,27 @@
 
   # command line utils
 
-  - name: install basic utilities
+  - name: install cli utilities
     apt: name={{ item }}
     with_items:
     - ntp
+    - udisks2
+    - udevil
+    - apparmor-profiles
+    - apparmor-profiles-extra
     - ufw
+
+  - name: updating grub defaults for app armor
+    patch: >
+      src=etc/default/grub.patch
+      dest=/etc/default/grub
+
+  - name: committing the app armor grub changes to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling app armor'; fi"
+
+  - name: update grub, since we updated the defaults
+    command: update-grub
 
   - name: configure ufw
     ufw: rule=allow name=OpenSSH
@@ -128,21 +155,24 @@
     ufw: state=enabled
 
   - name: committing the ufw changes to etckeeper
-    command: "etckeeper commit 'config and enable ufw'"
-    ignore_errors: yes
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'config and enable ufw'; fi"
 
   # GUI
 
   - name: install the desktop environment
     apt: name={{ item }}
     with_items:
+    - rxvt-unicode-256color
     - xorg
     - i3
     - lightdm
-    - network-manager-gnome
+    - wicd-gtk
     - pulseaudio
+    - xscreensaver
     - xautolock
     - gtk-redshift
+    - fonts-inconsolata
 
   - name: install iceweasel
     apt: name=iceweasel default_release=jessie-backports
