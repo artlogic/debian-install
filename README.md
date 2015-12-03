@@ -37,6 +37,7 @@ Things left to install
 Things left to configure
 ------------------------
 
+* Review: https://news.ycombinator.com/item?id=10644690
 * make sure the script can be run many times - current problems:
   * once root is locked, it can't be used (split the scripts?)
   * patches only work once... ignore errors - that seems unwise...
@@ -96,6 +97,7 @@ Things I use now, but I'm going to wait until I need them
 * review: https://wiki.archlinux.org/index.php/List_of_applications
 * review: https://faq.i3wm.org/question/4517/desktop-programs-to-use-with-i3/
 * review: https://news.ycombinator.com/item?id=10134009
+* review: https://news.ycombinator.com/item?id=10565605
 
 ### Tricky things
 
