@@ -33,6 +33,7 @@ Things left to install
   * Depends: libtinfo5 (>= 6) but 5.9+20140913-1+b1 is installed.
   * https://wiki.debian.org/BuildingFormalBackports
   * Waiting on my backport to be accepted...
+* maybe switch to source code pro: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=736681
 
 Things left to configure
 ------------------------
