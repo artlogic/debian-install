@@ -1,34 +1,5 @@
 ---
 
-# setup etckeeper and sudo and then grant the remote user sudo access
-
-# this host is expected to have a few characteristics so that this all works:
-# - ansible_user is set for the host
-# - the ansible_user and root have the same password (root is locked early on)
-
-- hosts: debian-virtual
-  gather_facts: no
-
-  become: yes
-  become_method: su
-
-  tasks:
-
-  - name: install etckeeper and update the package cache (installs git as well)
-    apt: update_cache=yes name=etckeeper
-
-  # this is a separate install because we want etckeeper to pick it up
-
-  - name: install sudo
-    apt: name=sudo
-
-  - name: add the ansible_user to the sudo group
-    user: name={{ ansible_user }} append=yes groups=sudo
-
-  - name: committing the group change to etckeeper
-    shell: "if etckeeper unclean;
-            then etckeeper commit 'adding {{ ansible_user }} to the sudo group'; fi"
-
 # perform the rest of the install
 
 - hosts: debian-virtual  # change if needed - see note above
@@ -56,9 +27,9 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling periodic updates for apt'; fi"
 
-  - name: enable the mozilla iceweasel release repo
-    copy: dest=/etc/apt/sources.list.d/iceweasel-release.list
-          src=etc/apt/sources.list.d/iceweasel-release.list
+  - name: enable the mozilla firefox release repo
+    copy: dest=/etc/apt/sources.list.d/firefox-release.list
+          src=etc/apt/sources.list.d/firefox-release.list
           owner=root
           group=root
           mode=0644
@@ -68,7 +39,7 @@
 
   - name: committing the sources.list change to etckeeper
     shell: "if etckeeper unclean;
-            then etckeeper commit 'enabling the iceweasel-release repo'; fi"
+            then etckeeper commit 'enabling the firefox-release repo'; fi"
 
   - name: enable the backports repo
     copy: dest=/etc/apt/sources.list.d/jessie-backports.list
@@ -80,24 +51,6 @@
   - name: committing the jessie-backports.list change to etckeeper
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling the jessie-backports repo'; fi"
-
-  - name: enable the unstable repo
-    copy: dest=/etc/apt/sources.list.d/unstable.list
-          src=etc/apt/sources.list.d/unstable.list
-          owner=root
-          group=root
-          mode=0644
-
-  - name: make sure unstable packages are never installed unless we ask specifically
-    copy: dest=/etc/apt/preferences.d/prevent-unstable
-          src=etc/apt/preferences.d/prevent-unstable
-          owner=root
-          group=root
-          mode=0644
-
-  - name: committing the unstable repo change to etckeeper
-    shell: "if etckeeper unclean;
-            then etckeeper commit 'enabling the unstable repo'; fi"
 
   - name: swapping ctrl and caps
     patch: >
@@ -169,13 +122,12 @@
     - lightdm
     - wicd-gtk
     - pulseaudio
-    - xscreensaver
     - xautolock
     - gtk-redshift
     - fonts-inconsolata
 
-  - name: install iceweasel
-    apt: name=iceweasel default_release=jessie-backports
+  - name: install firefox
+    apt: name=firefox default_release=jessie-backports
 
   - name: install pidgin
     apt: name={{ item }}
@@ -185,13 +137,8 @@
     - pidgin-otr
     - pidgin-twitter
 
-  # annoyingly, apt doesn't support the /distro syntax (only the -t distro syntax)
-
-  - name: install emacs (from unstable)
-    command: aptitude -y install {{ item }}
+  - name: install emacs
+    apt: name={{ item }} default_release=jessie-backports
     with_items:
-    - emacs24-common/unstable
-    - emacs24-common-non-dfsg/unstable
-    - emacs24-el/unstable
-    - emacs24-bin-common/unstable
-    - emacs24/unstable
+    - emacs24-common-non-dfsg
+    - emacs24

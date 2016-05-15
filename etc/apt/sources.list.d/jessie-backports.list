@@ -1,1 +1,6 @@
-deb http://http.debian.net/debian jessie-backports main
+deb http://ftp.debian.org/debian jessie-backports main
+deb-src http://ftp.debian.org/debian jessie-backports main
+
+# these are here purely for the emacs non-dfsg stuff
+deb http://ftp.debian.org/debian jessie-backports non-free
+deb-src http://ftp.debian.org/debian jessie-backports non-free

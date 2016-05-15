@@ -17,8 +17,10 @@ First Steps
 2. When tasksel starts, choose only the standard utilities and the ssh server
 3. Once the system boots, configure the wireless network, as detailed here: https://wiki.debian.org/WiFi/HowToUse#Command_Line - or maybe not - maybe just hardwire for initial config? If we do configure, we'll have to fix things so the network manager actually works.
 4. Rename the crypt device (it'll be sdb, should be sda): http://unix.stackexchange.com/a/81020
-5. Make sure to set the proper hosts in the install.yaml, and ansible_user in the host definition.
-6. Run the following: ansible-playbook install.yaml --ask-pass --ask-become-pass
+5. Make sure to set the proper hosts in the preinstall.yaml and install.yaml, and ansible_user in the host definition.
+6. Run the following:
+  1. ansible-playbook preinstall.yaml --ask-pass --ask-become-pass
+  2. ansible-playbook install.yaml --ask-pass --ask-become-pass
 
 Things that are broken
 ----------------------
@@ -28,36 +30,28 @@ Things that are broken
 Things left to install
 ----------------------
 
-* emacs unstable is no longer installing... :( - I'm trying to get a backport sponsered.
-  * Depends: libdbus-1-3 (>= 1.9.14) but 1.8.20-0+deb8u1 is installed.
-  * Depends: libtinfo5 (>= 6) but 5.9+20140913-1+b1 is installed.
-  * https://wiki.debian.org/BuildingFormalBackports
-  * Waiting on my backport to be accepted...
-* maybe switch to source code pro: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=736681
+* Non-blocking (future):
+  * maybe switch to source code pro: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=736681
+  * https://wiki.archlinux.org/index.php/TLP (in stretch - needs backporting)
 
 Things left to configure
 ------------------------
 
-* Review: https://news.ycombinator.com/item?id=10644690
-* make sure the script can be run many times - current problems:
-  * once root is locked, it can't be used (split the scripts?)
-  * patches only work once... ignore errors - that seems unwise...
-
 ### System
 
+* configure the network manager to start automatically (globally)
 * get devmon running as a service, and notifications of mounts would be nice
   * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=799745
   * devmon should probably have it's own user (group plugdev) to start the service
 * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
 * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
 * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
-* It may be a good idea to mark automatically installed dependencies that I'd prefer to not be nuked as intentionally installed (e.g. git)
-* configure the network manager to start automatically (globally)
 
 ### User
 
 User config will be either a separate playbook or a separate repo entirely (review because some of these may be global)
 
+* investigate using gnu stow or xstow to make dotfiles easier to deal with
 * modify i3bar/i3status to notify me of pending upgrades (dotfiles)
 * terminal config (colors, copy/paste, etc...) https://wiki.archlinux.org/index.php/Rxvt-unicode
 * How can I lock the screen manually? After a delay? (xautolock for automatic - looks like i3lock has a manual setting)
@@ -65,6 +59,10 @@ User config will be either a separate playbook or a separate repo entirely (revi
 * should we display the backlight status... or momentarily display it, like mac os? Maybe a status notification?
 * make sure the screen locks on suspend/hibernate
 * readline keyboard bindings in firefox: http://kb.mozillazine.org/Emacs_Keybindings_%28Firefox%29#GNU.2FLinux
+
+### Optional
+
+* It may be a good idea to mark automatically installed dependencies that I'd prefer to not be nuked as intentionally installed (e.g. git)
 
 Things I use now, but I'm going to wait until I need them
 ---------------------------------------------------------
@@ -99,6 +97,7 @@ Things I use now, but I'm going to wait until I need them
 * review: https://faq.i3wm.org/question/4517/desktop-programs-to-use-with-i3/
 * review: https://news.ycombinator.com/item?id=10134009
 * review: https://news.ycombinator.com/item?id=10565605
+* Review: https://news.ycombinator.com/item?id=10644690
 
 ### Tricky things
 
@@ -118,4 +117,3 @@ Ansible Annoyances
 ------------------
 
 * it would be nice to write a little etckeeper module (or use this: https://github.com/expansible/etckeeper )
-* it would be even nicer to fix the problem with the apt module

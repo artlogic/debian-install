@@ -1,6 +1,0 @@
-deb http://debian.cse.msu.edu/debian/ unstable main
-deb-src http://debian.cse.msu.edu/debian/ unstable main
-
-# these are here purely for the emacs non-dfsg stuff
-deb http://debian.cse.msu.edu/debian/ unstable non-free
-deb-src http://debian.cse.msu.edu/debian/ unstable non-free

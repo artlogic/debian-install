@@ -1,0 +1,41 @@
+---
+
+# setup etckeeper and sudo and then grant the remote user sudo access
+
+# this host is expected to have a few characteristics so that this all works:
+# - ansible_user is set for the host
+# - the ansible_user and root have the same password (root is locked early on)
+
+- hosts: debian-virtual
+  gather_facts: no
+
+  become: yes
+  become_method: su
+
+  tasks:
+
+  - name: install etckeeper and update the package cache (installs git as well)
+    apt: update_cache=yes name=etckeeper
+
+  # this is a separate install because we want etckeeper to pick it up
+
+  - name: install sudo
+    apt: name=sudo
+
+  - name: add the ansible_user to the sudo group
+    user: name={{ ansible_user }} append=yes groups=sudo
+
+  - name: committing the group change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'adding {{ ansible_user }} to the sudo group'; fi"
+
+  - name: turn of sudo lectures (screws up ansible)
+    copy: dest=/etc/sudoers.d/nolecture
+          src=etc/sudoers.d/nolecture
+          owner=root
+          group=root
+          mode=0440
+
+  - name: committing the sudoers change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'disabling lectures for sudo'; fi"
