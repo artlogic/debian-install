@@ -39,19 +39,20 @@ Things left to configure
 
 ### System
 
-* configure the network manager to start automatically (globally)
 * get devmon running as a service, and notifications of mounts would be nice
   * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=799745
   * devmon should probably have it's own user (group plugdev) to start the service
-* tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
-* review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
-* apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
+* Non-blocking (future):
+  * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
+  * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
+  * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
 
 ### User
 
 User config will be either a separate playbook or a separate repo entirely (review because some of these may be global)
 
 * investigate using gnu stow or xstow to make dotfiles easier to deal with
+* configure the network manager to start automatically: https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
 * modify i3bar/i3status to notify me of pending upgrades (dotfiles)
 * terminal config (colors, copy/paste, etc...) https://wiki.archlinux.org/index.php/Rxvt-unicode
 * How can I lock the screen manually? After a delay? (xautolock for automatic - looks like i3lock has a manual setting)
@@ -98,6 +99,7 @@ Things I use now, but I'm going to wait until I need them
 * review: https://news.ycombinator.com/item?id=10134009
 * review: https://news.ycombinator.com/item?id=10565605
 * Review: https://news.ycombinator.com/item?id=10644690
+* Review: http://joaquinlp.me/blog/your-guide-to-a-damn-light-arch-linux-with-i3-and-text-apps/
 
 ### Tricky things
 
