@@ -83,7 +83,7 @@ Things I use now, but I'm going to wait until I need them
 * Something like xScope
 * Something to Play Music (iTunes library sharing compatible)
 * Email? Some sort of a browser frame? A client? Mutt? Emacs?
-* Something like Preview (for viewing PDFs mostly - maybe images)
+* Something like Preview (for viewing PDFs mostly - maybe images - keep `less` in mind)
 * Do I need some kind of file explorer? Is the shell enough?
 * Some sort of Torrent client
 * Something like little snitch
@@ -106,6 +106,7 @@ Things I use now, but I'm going to wait until I need them
 * 1Password
   * https://news.ycombinator.com/item?id=10411146
   * http://www.passwordstore.org/
+  * http://keepass.info/
 
 Things Handled by Local Copies
 ------------------------------
