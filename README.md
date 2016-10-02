@@ -46,6 +46,7 @@ Things left to configure
   * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
   * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
   * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
+* Look into GRUB 2 and LUKS support
 
 ### User
 
