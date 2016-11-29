@@ -72,10 +72,24 @@
     command: aptitude -y install {{ item }}+M
     with_items: "{{ packages.stdout_lines }}"
 
+  # Open firmware for USB NIC (using until BIOS can be flashed)
+
+  - name: install htc_9271.fw (ath)
+    copy: dest=/lib/firmware/htc_9271.fw
+          src=lib/firmware/htc_9271.fw
+          owner=root
+          group=root
+          mode=0644
+
   # thinkpad specific stuff
 
   - name: install tp_smapi kernel module
     apt: name=tp-smapi-dkms
+
+  # power management
+
+  - name: install tlp
+    apt: name=tlp default_release=jessie-backports
 
   # command line utils
 
@@ -83,8 +97,6 @@
     apt: name={{ item }}
     with_items:
     - ntp
-    - udisks2
-    - udevil
     - apparmor-profiles
     - apparmor-profiles-extra
     - ufw
@@ -121,7 +133,7 @@
     - xorg
     - i3
     - lightdm
-    - wicd-gtk
+    - network-manager-gnome
     - pulseaudio
     - xautolock
     - gtk-redshift
@@ -136,7 +148,6 @@
     - pidgin
     - pidgin-libnotify
     - pidgin-otr
-    - pidgin-twitter
 
   - name: install emacs
     apt: name={{ item }} default_release=jessie-backports

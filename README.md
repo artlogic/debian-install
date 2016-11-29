@@ -32,21 +32,25 @@ Things left to install
 
 * Non-blocking (future):
   * maybe switch to source code pro: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=736681
-  * https://wiki.archlinux.org/index.php/TLP (in stretch - needs backporting)
 
 Things left to configure
 ------------------------
 
 ### System
 
-* get devmon running as a service, and notifications of mounts would be nice
-  * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=799745
-  * devmon should probably have it's own user (group plugdev) to start the service
+* Blocking
+  * Review  https://wiki.archlinux.org/index.php/TLP (additional config?)
+  * Replace ntp w/ timedatectl
+
 * Non-blocking (future):
-  * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi)
+  * get devmon (udisks2, udevil) running as a service, and notifications of mounts would be nice (pull from backports?)
+    * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=799745
+    * devmon should probably have it's own user (group plugdev) to start the service
+  * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi - it could be TLP takes care of this)
   * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
   * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
-* Look into GRUB 2 and LUKS support
+  * Look into GRUB 2 and LUKS support
+  * Talk w/ Rob about backporting emacs 25
 
 ### User
 
