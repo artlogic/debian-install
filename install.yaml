@@ -96,7 +96,6 @@
   - name: install cli utilities
     apt: name={{ item }}
     with_items:
-    - ntp
     - apparmor-profiles
     - apparmor-profiles-extra
     - ufw
