@@ -101,6 +101,7 @@
     - apparmor-profiles-extra
     - ufw
     - needrestart
+    - stow
 
   - name: updating grub defaults for app armor
     patch: >
