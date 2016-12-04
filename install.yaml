@@ -124,6 +124,18 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'config and enable ufw'; fi"
 
+  - name: enable time servers
+    patch: >
+      src=etc/systemd/timesyncd.conf.patch
+      dest=/etc/systemd/timesyncd.conf
+
+  - name: enable ntp
+    command: timedatectl set-ntp true
+
+  - name: committing ntp changes to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'config and enable ntp'; fi"
+
   # GUI
 
   - name: install the desktop environment

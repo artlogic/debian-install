@@ -40,7 +40,6 @@ Things left to configure
 
 * Blocking
   * Review  https://wiki.archlinux.org/index.php/TLP (additional config?)
-  * Replace ntp w/ timedatectl
 
 * Non-blocking (future):
   * get devmon (udisks2, udevil) running as a service, and notifications of mounts would be nice (pull from backports?)
