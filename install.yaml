@@ -91,6 +91,20 @@
   - name: install tlp
     apt: name=tlp default_release=jessie-backports
 
+  # ntp (via systemd)
+
+  - name: enable time servers
+    patch: >
+      src=etc/systemd/timesyncd.conf.patch
+      dest=/etc/systemd/timesyncd.conf
+
+  - name: enable ntp
+    command: timedatectl set-ntp true
+
+  - name: committing ntp changes to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'config and enable ntp'; fi"
+
   # command line utils
 
   - name: install cli utilities
@@ -101,6 +115,7 @@
     - ufw
     - needrestart
     - stow
+    - curl
 
   - name: updating grub defaults for app armor
     patch: >
@@ -124,17 +139,23 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'config and enable ufw'; fi"
 
-  - name: enable time servers
-    patch: >
-      src=etc/systemd/timesyncd.conf.patch
-      dest=/etc/systemd/timesyncd.conf
+  # Build Dependencies
 
-  - name: enable ntp
-    command: timedatectl set-ntp true
-
-  - name: committing ntp changes to etckeeper
-    shell: "if etckeeper unclean;
-            then etckeeper commit 'config and enable ntp'; fi"
+  - name: python build dependencies (for pyenv)
+    apt: name={{ item }}
+    with_items:
+    - build-essential
+    - libbz2-dev
+    - libdb-dev
+    - libffi-dev
+    - libgdbm-dev
+    - liblzma-dev
+    - libncursesw5-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - tk-dev
+    - zlib1g-dev
 
   # GUI
 
@@ -166,17 +187,3 @@
     with_items:
     - emacs24-common-non-dfsg
     - emacs24
-
-  - name: python build dependencies (for pyenv)
-    apt: name={{ item }}
-    with_items:
-    - libreadline-dev
-    - libssl-dev
-    - liblzma-dev
-    - libsqlite3-dev
-    - libgdbm-dev
-    - libbz2-dev
-    - libncursesw5-dev
-    - libdb-dev
-    - tk-dev
-    - zlib1g-dev
