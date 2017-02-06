@@ -166,3 +166,17 @@
     with_items:
     - emacs24-common-non-dfsg
     - emacs24
+
+  - name: python build dependencies (for pyenv)
+    apt: name={{ item }}
+    with_items:
+    - libreadline-dev
+    - libssl-dev
+    - liblzma-dev
+    - libsqlite3-dev
+    - libgdbm-dev
+    - libbz2-dev
+    - libncursesw5-dev
+    - libdb-dev
+    - tk-dev
+    - zlib1g-dev
