@@ -49,6 +49,7 @@ Things left to configure
   * Talk w/ Rob about backporting emacs 25
   * Multi-head support seems sketchy, or at least very manual... xrandr works, but could be more automatic - research is needed.
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
+  * look into using the fingerprint reader - just for fun maybe?
 
 ### User
 
@@ -61,6 +62,7 @@ User config will be either a separate playbook or a separate repo entirely (revi
 * configure the volume up/down/mute buttons on the keyboard to work - display the volume in the status bar
 * should we display the backlight status... or momentarily display it, like mac os? Maybe a status notification?
 * make sure the screen locks on suspend/hibernate
+* ssh agent?
 
 ### Optional
 
@@ -89,10 +91,9 @@ Things I use now, but I'm going to wait until I need them
 * Some sort of Torrent client
 * Something like little snitch
 * Something like caffeine
-* Something like Postman
+* Something like Postman (REST client)
 * A better twitter client - pidgin is kind of junky for that - or just use the website?
 * fan/temp ctrl (and show it in i3status - maybe) (lm-sensors, thinkfan, hddtemp, xsensors, fancontrol, thermald) (thinkpad_acpi does a lot of this already... do we need any of this?)
-* Some kind of a ssh agent?
 * review: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
 * review: http://suckless.org/ http://suckless.org/rocks http://suckless.org/sucks/
 * review: https://wiki.archlinux.org/index.php/List_of_applications
@@ -108,14 +109,6 @@ Things I use now, but I'm going to wait until I need them
   * https://news.ycombinator.com/item?id=10411146
   * http://www.passwordstore.org/
   * http://keepass.info/
-
-Things Handled by Local Copies
-------------------------------
-
-* python - pyenv
-* ruby - rvm/rbenv
-* emacs packages - package.el
-* node - nvm
 
 Ansible Annoyances
 ------------------
