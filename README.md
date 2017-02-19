@@ -61,7 +61,6 @@ User config will be either a separate playbook or a separate repo entirely (revi
 * configure the volume up/down/mute buttons on the keyboard to work - display the volume in the status bar
 * should we display the backlight status... or momentarily display it, like mac os? Maybe a status notification?
 * make sure the screen locks on suspend/hibernate
-* readline keyboard bindings in firefox: http://kb.mozillazine.org/Emacs_Keybindings_%28Firefox%29#GNU.2FLinux and https://www.emacswiki.org/emacs/Mozilla#toc9
 
 ### Optional
 
