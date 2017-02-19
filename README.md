@@ -15,8 +15,8 @@ First Steps
 
 1. Install debian using defaults. Choose LVM and full disk encryption. Make sure user and root passwords are identical.
 2. When tasksel starts, choose only the standard utilities and the ssh server
-3. Once the system boots, configure the wireless network, as detailed here: https://wiki.debian.org/WiFi/HowToUse#Command_Line - or maybe not - maybe just hardwire for initial config? If we do configure, we'll have to fix things so the network manager actually works.
-4. Rename the crypt device (it'll be sdb, should be sda): http://unix.stackexchange.com/a/81020
+3. Once the system boots, configure the wireless network, as detailed here: https://wiki.debian.org/WiFi/HowToUse#Command_Line - or maybe not - maybe just hardwire for initial config? If we do configure, we'll have to fix things so the network manager actually works... actually, just do everything hardwired, but then comment out eth0 in /etc/network/interfaces after the install is complete.
+4. Rename the crypt device (it'll be sdb, should be sda): http://unix.stackexchange.com/a/81020 - this seems to have been fixed.
 5. Make sure to set the proper hosts in the preinstall.yaml and install.yaml, and ansible_user in the host definition.
 6. Run the following:
   1. ansible-playbook preinstall.yaml --ask-pass --ask-become-pass
@@ -38,9 +38,6 @@ Things left to configure
 
 ### System
 
-* Blocking
-  * Review  https://wiki.archlinux.org/index.php/TLP (additional config?)
-
 * Non-blocking (future):
   * get devmon (udisks2, udevil) running as a service, and notifications of mounts would be nice (pull from backports?)
     * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=799745
@@ -50,20 +47,21 @@ Things left to configure
   * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
   * Look into GRUB 2 and LUKS support
   * Talk w/ Rob about backporting emacs 25
+  * Multi-head support seems sketchy, or at least very manual... xrandr works, but could be more automatic - research is needed.
+  * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
 
 ### User
 
 User config will be either a separate playbook or a separate repo entirely (review because some of these may be global)
 
-* investigate using gnu stow or xstow to make dotfiles easier to deal with
-* configure the network manager to start automatically: https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
+* configure the network manager to start automatically (this might already be happening?): https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
 * modify i3bar/i3status to notify me of pending upgrades (dotfiles)
 * terminal config (colors, copy/paste, etc...) https://wiki.archlinux.org/index.php/Rxvt-unicode
 * How can I lock the screen manually? After a delay? (xautolock for automatic - looks like i3lock has a manual setting)
 * configure the volume up/down/mute buttons on the keyboard to work - display the volume in the status bar
 * should we display the backlight status... or momentarily display it, like mac os? Maybe a status notification?
 * make sure the screen locks on suspend/hibernate
-* readline keyboard bindings in firefox: http://kb.mozillazine.org/Emacs_Keybindings_%28Firefox%29#GNU.2FLinux
+* readline keyboard bindings in firefox: http://kb.mozillazine.org/Emacs_Keybindings_%28Firefox%29#GNU.2FLinux and https://www.emacswiki.org/emacs/Mozilla#toc9
 
 ### Optional
 

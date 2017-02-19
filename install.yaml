@@ -167,7 +167,7 @@
     - i3
     - lightdm
     - network-manager-gnome
-    - pulseaudio
+    - pavucontrol  # includes pulseaudio
     - xautolock
     - gtk-redshift
     - fonts-inconsolata
