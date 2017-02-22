@@ -78,7 +78,7 @@ Things I use now, but I'm going to wait until I need them
 * Gimp
 * Chromium
 * LibreOffice
-* Slack (is there a Linux client? or just use the website)
+* Slack (is there a Linux client? or just use the website) https://github.com/raelgc/scudcloud/
 * pidgin-awayonlock (is there a version that works *without* gnome-screensaver?)
 
 ### Things I use, but not by name
