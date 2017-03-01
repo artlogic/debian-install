@@ -50,6 +50,7 @@ Things left to configure
   * Multi-head support seems sketchy, or at least very manual... xrandr works, but could be more automatic - research is needed.
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
   * look into using the fingerprint reader - just for fun maybe?
+  * Consider using Tor for updates: https://blog.torproject.org/blog/tor-heart-apt-transport-tor-and-debian-onions
 
 ### User
 
