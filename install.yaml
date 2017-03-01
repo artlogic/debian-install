@@ -35,7 +35,7 @@
           mode=0644
 
   - name: install the mozilla key
-    apt_key: url=http://mozilla.debian.net/archive.asc
+    apt_key: url=https://mozilla.debian.net/archive.asc
 
   - name: committing the sources.list change to etckeeper
     shell: "if etckeeper unclean;
