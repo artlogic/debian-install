@@ -51,6 +51,22 @@ Things left to configure
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
   * look into using the fingerprint reader - just for fun maybe?
   * Consider using Tor for updates: https://blog.torproject.org/blog/tor-heart-apt-transport-tor-and-debian-onions
+  * https://wiki.debian.org/SSDOptimization
+  * https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X200
+  * Try and resolve DPI issues: http://www-archive.mozilla.org/unix/dpi.html and https://wiki.debian.org/MonitorDPI and https://wiki.archlinux.org/index.php/xorg#Display_size_and_DPI
+
+Odd problem with waking up, research:
+
+```
+Message from syslogd@wardenclyffe at Mar 11 15:45:13 ...
+ kernel:[21718.864334] Uhhuh. NMI received for unknown reason 31 on CPU 0.
+
+Message from syslogd@wardenclyffe at Mar 11 15:45:13 ...
+ kernel:[21718.864337] Do you have a strange power saving mode enabled?
+
+Message from syslogd@wardenclyffe at Mar 11 15:45:13 ...
+ kernel:[21718.864338] Dazed and confused, but trying to continue
+```
 
 ### User
 
@@ -58,12 +74,38 @@ User config will be either a separate playbook or a separate repo entirely (revi
 
 * configure the network manager to start automatically (this might already be happening?): https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
 * modify i3bar/i3status to notify me of pending upgrades (dotfiles)
-* terminal config (colors, copy/paste, etc...) https://wiki.archlinux.org/index.php/Rxvt-unicode
+* terminal config (colors, copy/paste, etc...)
+  * https://wiki.archlinux.org/index.php/Rxvt-unicode
+  * https://github.com/tony/.dot-config/blob/master/.Xresources
+  * https://github.com/hukl/Smyck-Color-Scheme
+  * http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+  * http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.7.pod
+  * http://linuxcommand.org/lc3_adv_tput.php
 * How can I lock the screen manually? After a delay? (xautolock for automatic - looks like i3lock has a manual setting)
 * configure the volume up/down/mute buttons on the keyboard to work - display the volume in the status bar
 * should we display the backlight status... or momentarily display it, like mac os? Maybe a status notification?
 * make sure the screen locks on suspend/hibernate
-* ssh agent?
+* ssh agent? http://mah.everybody.org/docs/ssh
+* configure function keys (does fn-other key work?):
+  * fn-f1: reserved
+  * fn-f2: lock computer
+  * fn-f3: power settings - may not use this
+  * fn-f4: sleep (works, but test)
+  * fn-f5: wireless config - bring up nm-applet?
+  * fn-f6: audio settings - unused
+  * fn-f7: switch disply source
+  * fn-f8: input device settings - may not use this
+  * fn-f9: easy eject - unused
+  * fn-f10: reserved
+  * fn-f11: reserved
+  * fn-f12: hibernate (works)
+  * fn-pgup: thinklight (works)
+  * fn-home: brightness up (works)
+  * fn-end: brightness down (works)
+  * fn-space: magnifier - unused
+  * fn-prtsc, fn-scrlk, fn-pause: sysrq, numlk, break (all work)
+  * fn-cursor keys: stop, play, ff, rw
+  * Other buttons: volume up, down, and mute
 
 ### Optional
 
