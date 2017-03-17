@@ -171,6 +171,7 @@
     - xautolock
     - gtk-redshift
     - fonts-inconsolata
+    - xcalib
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
