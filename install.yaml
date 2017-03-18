@@ -186,6 +186,8 @@
     - gtk-redshift
     - fonts-inconsolata
     - xcalib
+    - gnome-screenshot  # doesn't depend on gnome, oddly
+    - gimp
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
