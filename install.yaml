@@ -171,24 +171,6 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'config and enable ufw'; fi"
 
-  # Build Dependencies
-
-  - name: python build dependencies (for pyenv)
-    apt: name={{ item }}
-    with_items:
-    - build-essential
-    - libbz2-dev
-    - libdb-dev
-    - libffi-dev
-    - libgdbm-dev
-    - liblzma-dev
-    - libncursesw5-dev
-    - libreadline-dev
-    - libsqlite3-dev
-    - libssl-dev
-    - tk-dev
-    - zlib1g-dev
-
   # GUI
 
   - name: install the desktop environment
@@ -220,3 +202,21 @@
     with_items:
     - emacs24-common-non-dfsg
     - emacs24
+
+  # Build Dependencies
+
+  - name: python build dependencies (for pyenv)
+    apt: name={{ item }}
+    with_items:
+    - build-essential
+    - libbz2-dev
+    - libdb-dev
+    - libffi-dev
+    - libgdbm-dev
+    - liblzma-dev
+    - libncursesw5-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - tk-dev
+    - zlib1g-dev
