@@ -36,10 +36,17 @@
     command: update-initramfs -u -k all
 
   - name: link weekly TRIM for SSD (service)
-    command: systemctl link /usr/share/doc/util-linux/examples/fstrim.service
+    file: src=/usr/share/doc/util-linux/examples/fstrim.service
+          dest=/etc/systemd/system/fstrim.service
+          state=link
 
-  - name: link weekly TRIM for SSD (timer)
-    command: systemctl link /usr/share/doc/util-linux/examples/fstrim.timer
+  # this file is copied and not linked because systemd won't let you
+  # enable a symlink... there are probably good reasons, but this is
+  # really annoying
+  - name: copy weekly TRIM for SSD (timer)
+    copy: src=/usr/share/doc/util-linux/examples/fstrim.timer
+          dest=/etc/systemd/system/fstrim.timer
+          remote_src=true
 
   - name: enable weekly TRIM for SSD
     systemd: name=fstrim.timer
