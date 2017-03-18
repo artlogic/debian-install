@@ -13,14 +13,15 @@ Goals
 First Steps
 -----------
 
+A hardwired network connection is currently required for the install process.
+
 1. Install debian using defaults. Choose LVM and full disk encryption. Make sure user and root passwords are identical.
 2. When tasksel starts, choose only the standard utilities and the ssh server
-3. Once the system boots, configure the wireless network, as detailed here: https://wiki.debian.org/WiFi/HowToUse#Command_Line - or maybe not - maybe just hardwire for initial config? If we do configure, we'll have to fix things so the network manager actually works... actually, just do everything hardwired, but then comment out eth0 in /etc/network/interfaces after the install is complete.
-4. Rename the crypt device (it'll be sdb, should be sda): http://unix.stackexchange.com/a/81020 - this seems to have been fixed.
-5. Make sure to set the proper hosts in the preinstall.yaml and install.yaml, and ansible_user in the host definition.
-6. Run the following:
+3. Make sure to set the proper hosts in the preinstall.yaml and install.yaml, and ansible_user in the host definition.
+4. Run the following:
   1. ansible-playbook preinstall.yaml --ask-pass --ask-become-pass
   2. ansible-playbook install.yaml --ask-pass --ask-become-pass
+3. Comment out eth0 in /etc/network/interfaces after the install is complete.
 
 Things that are broken
 ----------------------
@@ -51,8 +52,9 @@ Things left to configure
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
   * look into using the fingerprint reader - just for fun maybe?
   * Consider using Tor for updates: https://blog.torproject.org/blog/tor-heart-apt-transport-tor-and-debian-onions
-  * https://wiki.debian.org/SSDOptimization
-  * https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X200
+  * review: https://wiki.debian.org/SSDOptimization
+    * Enable TRIM for LVM (see discard option in /etc/lvm/lvm.conf)
+  * https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X200 (there's definitely some non-system stuff here)
   * Try and resolve DPI issues: http://www-archive.mozilla.org/unix/dpi.html and https://wiki.debian.org/MonitorDPI and https://wiki.archlinux.org/index.php/xorg#Display_size_and_DPI
 
 Odd problem with waking up, research:
