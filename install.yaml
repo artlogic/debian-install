@@ -56,6 +56,9 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling weekly TRIM for SSD'; fi"
 
+  - name: install the HTTPS transport for apt
+    apt: name=apt-transport-https
+
   - name: enable the mozilla firefox release repo
     copy: dest=/etc/apt/sources.list.d/firefox-release.list
           src=etc/apt/sources.list.d/firefox-release.list
