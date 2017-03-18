@@ -27,6 +27,28 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling periodic updates for apt'; fi"
 
+  - name: update crypttab to pass discards
+    crypttab: name=sda5_crypt
+              opts=discard
+              state=opts_present
+
+  - name: update initramfs with new crypttab option
+    command: update-initramfs -u -k all
+
+  - name: link weekly TRIM for SSD (service)
+    command: systemctl link /usr/share/doc/util-linux/examples/fstrim.service
+
+  - name: link weekly TRIM for SSD (timer)
+    command: systemctl link /usr/share/doc/util-linux/examples/fstrim.timer
+
+  - name: enable weekly TRIM for SSD
+    systemd: name=fstrim.timer
+             enabled=yes
+
+  - name: committing the TRIM changes to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'enabling weekly TRIM for SSD'; fi"
+
   - name: enable the mozilla firefox release repo
     copy: dest=/etc/apt/sources.list.d/firefox-release.list
           src=etc/apt/sources.list.d/firefox-release.list
