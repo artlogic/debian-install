@@ -185,6 +185,7 @@
     - xautolock
     - gtk-redshift
     - fonts-inconsolata
+    - fonts-liberation
     - xcalib
     - gnome-screenshot  # doesn't depend on gnome, oddly
     - gimp
