@@ -10,8 +10,8 @@ Goals
 2. Unix philosophy FTW.
 3. Only install what's needed.
 
-First Steps
------------
+Install
+-------
 
 A hardwired network connection is currently required for the install process.
 
@@ -21,7 +21,12 @@ A hardwired network connection is currently required for the install process.
 4. Run the following:
   1. ansible-playbook preinstall.yaml --ask-pass --ask-become-pass
   2. ansible-playbook install.yaml --ask-pass --ask-become-pass
-3. Comment out eth0 in /etc/network/interfaces after the install is complete.
+5. Comment out all references to eth0 in /etc/network/interfaces after the install is complete (let the network manager handle things)
+6. Clone [dotfiles](https://github.com/artlogic/dotfiles) to the home directory and install.
+7. Clone [.emacs.d](https://github.com/artlogic/.emacs.d/) to the home directory.
+8. Generate a new SSH key: `ssh-keygen -t ed25519`.
+9. Reboot!
+
 
 Things that are broken
 ----------------------
@@ -46,16 +51,13 @@ Things left to configure
   * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi - it could be TLP takes care of this)
   * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
   * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
-  * Look into GRUB 2 and LUKS support
   * Talk w/ Rob about backporting emacs 25
   * Multi-head support seems sketchy, or at least very manual... xrandr works, but could be more automatic - research is needed.
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
   * look into using the fingerprint reader - just for fun maybe?
   * Consider using Tor for updates: https://blog.torproject.org/blog/tor-heart-apt-transport-tor-and-debian-onions
   * review: https://wiki.debian.org/SSDOptimization
-    * Enable TRIM for LVM (see discard option in /etc/lvm/lvm.conf)
   * https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X200 (there's definitely some non-system stuff here)
-  * Try and resolve DPI issues: http://www-archive.mozilla.org/unix/dpi.html and https://wiki.debian.org/MonitorDPI and https://wiki.archlinux.org/index.php/xorg#Display_size_and_DPI
 
 Odd problem with waking up, research:
 
@@ -108,6 +110,7 @@ User config will be either a separate playbook or a separate repo entirely (revi
   * fn-prtsc, fn-scrlk, fn-pause: sysrq, numlk, break (all work)
   * fn-cursor keys: stop, play, ff, rw
   * Other buttons: volume up, down, and mute
+  * Assign prtsc to gnome-screenshot - maybe interactive?
 
 ### Optional
 
@@ -120,7 +123,6 @@ Things I use now, but I'm going to wait until I need them
 * Calibre
 * Dropbox (replace with syncthing/owncloud?)
 * Skype (shouldn't any VoIP client work?)
-* Gimp
 * Chromium
 * LibreOffice
 * Slack (is there a Linux client? or just use the website) https://github.com/raelgc/scudcloud/
