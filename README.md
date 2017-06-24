@@ -51,7 +51,7 @@ Things left to configure
   * tp_smapi stuff (battery, HDAPS - see: http://www.thinkwiki.org/wiki/Drivers and http://www.thinkwiki.org/wiki/Tp_smapi - it could be TLP takes care of this)
   * review: https://www.debian.org/doc/manuals/securing-debian-howto/index.en.html
   * apparmor - this may be interesting: https://help.ubuntu.com/14.04/serverguide/apparmor.html and https://wiki.debian.org/AppArmor/HowToUse - currently very few apps have profiles
-  * Talk w/ Rob about backporting emacs 25
+  * Talk w/ Rob about backporting emacs 25.2 (once stretch has backports)
   * Multi-head support seems sketchy, or at least very manual... xrandr works, but could be more automatic - research is needed.
   * lightdm is taking care of the desktop background - but doesn't seem to work well with disparate resolutions and multi-head. It could be we need feh or nitrogen.
   * look into using the fingerprint reader - just for fun maybe?
