@@ -59,6 +59,7 @@
   - name: install the HTTPS transport for apt
     apt: name=apt-transport-https
 
+  # TODO: this appears to be broken - we probably need to disable and use ESR
   - name: enable the mozilla firefox release repo
     copy: dest=/etc/apt/sources.list.d/firefox-release.list
           src=etc/apt/sources.list.d/firefox-release.list
@@ -96,8 +97,9 @@
   - name: install any pending upgrades (and update the cache with the new repos)
     apt: update_cache=yes upgrade=full
 
+  # TODO: requires aptitude, but it's not installed by default anymore!
   - name: retrieve recommended packages that aren't installed
-    shell: aptitude search '~RBrecommends:~i' | cut -f4 -d' '
+    shell: aptitude search '~RBrecommends:~i' | cut -f3 -d' '
     register: packages
 
   - name: install missing recommended packages, marking auto
@@ -125,6 +127,7 @@
 
   # ntp (via systemd)
 
+  # TODO: this patch is broken and maybe unneeded
   - name: enable time servers
     patch: >
       src=etc/systemd/timesyncd.conf.patch
@@ -202,6 +205,7 @@
     - pidgin-libnotify
     - pidgin-otr
 
+  # TODO: this isn't in backports, but hopefull emacs 25 will be soon
   - name: install emacs
     apt: name={{ item }} default_release=jessie-backports
     with_items:
