@@ -189,7 +189,8 @@
     - xcalib
     - gnome-screenshot  # doesn't depend on gnome, oddly
     - gimp
-    - xclip
+    - xclip  # command line tool for interacting with the clipboard
+    - chromium  # needed for dev work
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
