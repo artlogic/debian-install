@@ -189,6 +189,7 @@
     - xcalib
     - gnome-screenshot  # doesn't depend on gnome, oddly
     - gimp
+    - xclip
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
