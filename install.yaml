@@ -229,3 +229,10 @@
     - libssl-dev
     - tk-dev
     - zlib1g-dev
+
+  # Python Utilities (needed for pyenv)
+  - name: python utilities (for pyenv)
+    apt: name={{ item }}
+    with_items:
+    - python-pip
+    - python-virtualenv
