@@ -158,6 +158,7 @@
     - needrestart
     - stow
     - curl
+    - dnsutils
 
   - name: updating grub defaults for app armor
     patch: >
