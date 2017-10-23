@@ -16,6 +16,13 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'locking the root user'; fi"
 
+  - name: add the ansible_user to the dialout group (needed for chirp)
+    user: name={{ ansible_user }} append=yes groups=sudo
+
+  - name: committing the group change to etckeeper
+    shell: "if etckeeper unclean;
+            then etckeeper commit 'adding {{ ansible_user }} to the dialout group'; fi"
+
   - name: turn on periodic apt updates and autocleaning
     copy: dest=/etc/apt/apt.conf.d/02periodic
           src=etc/apt/apt.conf.d/02periodic
