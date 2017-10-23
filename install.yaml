@@ -213,12 +213,12 @@
     - pidgin-libnotify
     - pidgin-otr
 
-  # TODO: this isn't in backports, but hopefull emacs 25 will be soon
   - name: install emacs
-    apt: name={{ item }} default_release=jessie-backports
+    apt: name={{ item }}
     with_items:
-    - emacs24-common-non-dfsg
-    - emacs24
+    - emacs25-common-non-dfsg
+    - emacs25
+    - install-info
 
   # Build Dependencies
 
