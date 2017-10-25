@@ -203,6 +203,7 @@
     - xclip  # command line tool for interacting with the clipboard
     - chromium  # needed for dev work
     - chirp
+    - corebird  # twitter
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
