@@ -81,6 +81,7 @@
     shell: "if etckeeper unclean;
             then etckeeper commit 'enabling the firefox-release repo'; fi"
 
+  # TODO: change this to stretch!
   - name: enable the backports repo
     copy: dest=/etc/apt/sources.list.d/jessie-backports.list
           src=etc/apt/sources.list.d/jessie-backports.list
@@ -130,7 +131,7 @@
   # power management
 
   - name: install tlp
-    apt: name=tlp default_release=jessie-backports
+    apt: name=tlp
 
   # ntp (via systemd)
 
