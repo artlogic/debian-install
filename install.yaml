@@ -205,6 +205,7 @@
     - chromium  # needed for dev work
     - chirp
     - corebird  # twitter
+    - nautilus-dropbox  # until I can switch over to syncthing
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
