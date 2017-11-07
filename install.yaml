@@ -209,6 +209,7 @@
     - chirp
     - corebird  # twitter
     - nautilus-dropbox  # until I can switch over to syncthing
+    - freerdp-x11
 
   - name: install firefox
     apt: name=firefox default_release=jessie-backports
