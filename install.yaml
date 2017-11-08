@@ -86,7 +86,7 @@
   # also install skypeforlinux below
   
   # also add the ubiquiti repo
-  # http://linuxpitstop.com/install-and-setup-unifi-controller-on-ubuntu-linux-16-04/
+  # https://help.ubnt.com/hc/en-us/articles/220066768-UniFi-How-to-Install-Update-via-APT-on-Debian-or-Ubuntu
 
   # TODO: change this to stretch!
   - name: enable the backports repo
