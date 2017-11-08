@@ -83,6 +83,10 @@
 
   # add the skype key: https://repo.skype.com/data/SKYPE-GPG-KEY
   # add the skype repo: etc/apt/sources.list.d/skype-stable.list
+  # also install skypeforlinux below
+  
+  # also add the ubiquiti repo
+  # http://linuxpitstop.com/install-and-setup-unifi-controller-on-ubuntu-linux-16-04/
 
   # TODO: change this to stretch!
   - name: enable the backports repo
