@@ -167,6 +167,7 @@
     - stow
     - curl
     - dnsutils
+    - whois
 
   - name: updating grub defaults for app armor
     patch: >
