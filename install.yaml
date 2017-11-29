@@ -84,7 +84,7 @@
   # add the skype key: https://repo.skype.com/data/SKYPE-GPG-KEY
   # add the skype repo: etc/apt/sources.list.d/skype-stable.list
   # also install skypeforlinux below
-  
+
   # also add the ubiquiti repo
   # https://help.ubnt.com/hc/en-us/articles/220066768-UniFi-How-to-Install-Update-via-APT-on-Debian-or-Ubuntu
 
